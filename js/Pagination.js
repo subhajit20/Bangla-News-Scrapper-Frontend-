@@ -1,3 +1,11 @@
+/**
+ * Made self made pagination function for
+ * showing a bucnh of data a page wise format 
+ * @param {data length(integer)} len 
+ * @param {data itself as array} arr 
+ * @returns
+ */
+
 export function Pagination(len,arr){
     let newarr = []
 
