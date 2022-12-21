@@ -5,28 +5,54 @@ const newsimg = document.querySelectorAll(".newsimg");
 const newslink = document.querySelectorAll(".newslink");
 const newshead = document.querySelectorAll(".newshead");
 let count = document.querySelector('.count');
-const paginations_row = document.querySelector("#paginations_row")
+const paginations_row = document.querySelector("#paginations_row");
+const spinner_border = document.querySelectorAll(".spinner-border");
 
+let flag = false;
 let html = ``;
 let data = []
 let i = 0;
 let previousnumber = i;
 // countingnumbers.innerHTML = i;
+
+if(!flag){
+    for(let p = 0; p <= spinner_border.length-1; p++){
+        spinner_border[p].style.display = "block";
+    }
+}
+
 NewsData().then((news)=>{
     let newnews = news.slice(0,100)
     
     const paginations = Pagination(newnews.length,newnews);
     data = paginations;
+    
+    
+}).catch((c)=>{
+    flag = false;
+    if(!flag){
+        for(let p = 0; p <= spinner_border.length-1; p++){
+            spinner_border[p].style.display = "block";
+        }
+    }
+})
+
+
+let spantag;
+let allspantags;
+setTimeout(()=>{
+
+    flag = true;
+    for(let p = 0; p <= spinner_border.length-1; p++){
+        spinner_border[p].style.display = "none";
+    }
+
     for(let p = 0; p <= data[i].length-1; p++){
         newsimg[p].src = data[i][p].imglink;
         newshead[p].innerHTML = data[i][p].heading;
         newslink[p].href = data[i][p].link;
     }
-    
-})
-let spantag;
-let allspantags;
-setTimeout(()=>{
+
     for(let k = 0; k <= data.length-1; k++){
         spantag = document.createElement("span");
         spantag.setAttribute('id',k);

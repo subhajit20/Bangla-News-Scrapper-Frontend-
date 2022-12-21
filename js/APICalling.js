@@ -3,6 +3,5 @@ export async function NewsData(){
     const data = await res.json();
 
 
-
     return data.news
 }
